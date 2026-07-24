@@ -1,4 +1,4 @@
-# git-visualizer2
+# Electron App
 
 An Electron application with React and TypeScript
 
