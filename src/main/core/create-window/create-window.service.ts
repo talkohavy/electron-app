@@ -40,6 +40,11 @@ export function createWindow(): BrowserWindow {
     return { action: 'deny' };
   });
 
+  // Open the DevTools.
+  window.webContents.openDevTools({
+    mode: 'right', // <--- defaults to 'right'
+  });
+
   // HMR for the renderer in dev; the built file in production.
   if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
     window.loadURL(process.env['ELECTRON_RENDERER_URL']);

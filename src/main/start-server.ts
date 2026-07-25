@@ -1,4 +1,4 @@
-import { electronApp, optimizer } from '@electron-toolkit/utils';
+import { electronApp } from '@electron-toolkit/utils';
 import { ElectronEvents } from '@root/common/constants';
 import { app, BrowserWindow } from 'electron';
 import { createWindow } from './core/create-window';
@@ -25,11 +25,12 @@ async function startApp(): Promise<void> {
 function handleAppIsReady(): void {
   electronApp.setAppUserModelId('com.electron');
 
-  // F12 toggles DevTools in dev; ignore Cmd/Ctrl+R in production.
   app.on(ElectronEvents.BrowserWindowCreated, (_, window) => {
-    optimizer.watchWindowShortcuts(window, {
-      zoom: true, // <--- support cmd+/- to zoom in and out. Defaults to false.
-      escToCloseWindow: true, // <--- support esc to close window. Defaults to false.
+    window.webContents.on('before-input-event', (event, input) => {
+      if (input.code === 'Escape') {
+        window.close();
+        event.preventDefault();
+      }
     });
   });
 
