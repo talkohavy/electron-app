@@ -6,6 +6,7 @@ import { IpcBridgeService } from './core/ipc-bridge';
 import { initClockModule } from './modules/clock';
 import { initCounterModule } from './modules/counter';
 import { initDialogModule } from './modules/dialog';
+import { initMenuModule } from './modules/menu';
 import { initSystemModule } from './modules/system';
 
 startApp();
@@ -39,6 +40,7 @@ function handleAppIsReady(): void {
 
   const ipcBridgeService = new IpcBridgeService();
 
+  initMenuModule(ipcBridgeService);
   initClockModule(ipcBridgeService);
   initCounterModule(ipcBridgeService);
   initDialogModule(ipcBridgeService);

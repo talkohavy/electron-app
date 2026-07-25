@@ -13,6 +13,10 @@ export const ApiEvents = {
   // Clock
   ClockSetRunning: 'clock:setRunning',
   ClockTick: 'clock:tick',
+
+  // Menu
+  MenuCommand: 'menu:command',
+  MenuShowContext: 'menu:showContextMenu',
 } as const;
 
 export type ApiEventValues = (typeof ApiEvents)[keyof typeof ApiEvents];

@@ -5,8 +5,11 @@ import RedirectToHome from '@renderer/pages/RedirectToHome';
 import { routes } from '@renderer/routes';
 import Layout from '../Layout';
 import { routeRender } from '../RouteRender';
+import { useAppLogic } from './logic/useAppLogic';
 
 export default function App() {
+  useAppLogic();
+
   return (
     <Layout>
       <Suspense>

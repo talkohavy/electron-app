@@ -1,6 +1,7 @@
 import { ClockApi } from './features/clock.api';
 import { CounterApi } from './features/counter.api';
 import { DialogApi } from './features/dialog.api';
+import { MenuApi } from './features/menu.api';
 import { SystemApi } from './features/system.api';
 import type { IpcService } from '../ipc-service';
 
@@ -24,11 +25,13 @@ export class Api {
   readonly dialog: DialogApi;
   readonly counter: CounterApi;
   readonly clock: ClockApi;
+  readonly menu: MenuApi;
 
   constructor(ipc: IpcService) {
     this.system = new SystemApi(ipc);
     this.dialog = new DialogApi(ipc);
     this.counter = new CounterApi(ipc);
     this.clock = new ClockApi(ipc);
+    this.menu = new MenuApi(ipc);
   }
 }
