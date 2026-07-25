@@ -51,7 +51,7 @@ export class MenuService {
    * is selected). This is a transient menu - `popup()` not `setApplicationMenu`.
    */
   popupContext(window: BrowserWindow, request: ContextMenuRequest): void {
-    const { x, y, selectionText } = request;
+    const { x, y, selectionText, isDarkMode } = request;
     const hasSelection = Boolean(selectionText?.trim());
 
     const template: MenuItemConstructorOptions[] = [
@@ -59,7 +59,10 @@ export class MenuService {
         label: isMac() ? '\u{1F311} Toggle Dark Mode' : '\u{1F311} Toggle Dark/Light',
         accelerator: 'CmdOrCtrl+D',
         click: () => {
-          this.sendMenuCommand({ type: MenuCommands.ToggleTheme });
+          this.sendMenuCommand({
+            type: MenuCommands.ToggleTheme,
+            payload: { isDarkMode },
+          });
         },
       },
       { type: 'separator' },

@@ -24,14 +24,20 @@ export type ToastPayload = {
   emoji?: string;
 };
 
+export type ToggleThemePayload = {
+  isDarkMode: boolean;
+};
+
 export type NavigateCommand = Required<MenuCommandMessage<NavigatePayload>>;
 export type AccentCommand = Required<MenuCommandMessage<AccentPayload>>;
 export type CounterAddCommand = Required<MenuCommandMessage<CounterAddPayload>>;
 export type ToastCommand = Required<MenuCommandMessage<ToastPayload>>;
+export type ToggleThemeCommand = Required<MenuCommandMessage<ToggleThemePayload>>;
 
 export type ContextMenuRequest = {
   x: number;
   y: number;
   /** Selected text under the cursor, if any - lets us tailor the menu. */
   selectionText?: string;
+  isDarkMode: boolean;
 };

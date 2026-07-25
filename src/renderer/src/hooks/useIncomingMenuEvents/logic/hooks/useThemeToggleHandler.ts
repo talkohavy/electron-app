@@ -1,15 +1,22 @@
 import { useCallback } from 'react';
 import { showInfoToast } from '@renderer/common/utils/toast';
-import { useDarkTheme } from '@renderer/providers/DarkThemeProvider';
+import { ThemeOptions, useDarkTheme } from '@renderer/providers/DarkThemeProvider';
+import type { ToggleThemePayload } from '@root/common/types';
 
 export function useThemeToggleHandler() {
-  const { toggleDarkMode } = useDarkTheme();
+  const { switchTo } = useDarkTheme();
 
-  const handleToggleTheme = useCallback(() => {
-    const nowDark = toggleDarkMode();
+  const handleToggleTheme = useCallback(
+    (payload: ToggleThemePayload) => {
+      const { isDarkMode } = payload;
 
-    showInfoToast({ title: `${nowDark ? 'Dark' : 'Light'} mode` });
-  }, [toggleDarkMode]);
+      const mode = isDarkMode ? ThemeOptions.Light : ThemeOptions.Dark;
+      switchTo(mode);
+
+      showInfoToast({ title: `${mode} mode` });
+    },
+    [switchTo],
+  );
 
   return { handleToggleTheme };
 }
