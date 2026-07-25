@@ -14,7 +14,11 @@ export function createWindow(): BrowserWindow {
     width: 900,
     height: 670,
     show: false,
-    autoHideMenuBar: true,
+    /**
+     * Keep our hand-rolled menu visible on Windows/Linux (no-op on macOS, where
+     * the menu always lives in the system top bar).
+     */
+    autoHideMenuBar: false,
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
