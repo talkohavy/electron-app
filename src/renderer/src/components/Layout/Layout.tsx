@@ -1,4 +1,5 @@
 import type { PropsWithChildren } from 'react';
+import { Toaster } from 'sonner';
 import Header from './Header';
 import Main from './Main';
 import Sidebar from './Sidebar';
@@ -17,6 +18,8 @@ export default function Layout(props: LayoutProps) {
 
         <Main>{children}</Main>
       </div>
+
+      <Toaster />
     </div>
   );
 }
