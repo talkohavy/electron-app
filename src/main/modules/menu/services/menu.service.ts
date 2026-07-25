@@ -230,13 +230,6 @@ export class MenuService {
         { role: 'togglefullscreen' },
         { type: 'separator' },
         {
-          label: 'Toggle Dark Mode',
-          accelerator: 'CmdOrCtrl+D',
-          click: () => {
-            this.sendMenuCommand({ type: MenuCommands.ToggleTheme });
-          },
-        },
-        {
           // A checkbox item: Electron tracks the `checked` state for us.
           label: 'Always on Top',
           type: 'checkbox',
