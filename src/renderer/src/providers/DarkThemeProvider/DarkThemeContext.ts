@@ -1,4 +1,5 @@
 import { createContext, useContext } from 'react';
+import type { ThemeOptionValues } from './logic/constants';
 
 export type DarkThemeContextValue = {
   isDarkMode: boolean;
@@ -6,6 +7,7 @@ export type DarkThemeContextValue = {
    * @returns The new state it toggles to.
    */
   toggleDarkMode: () => boolean;
+  switchTo: (mode: ThemeOptionValues) => boolean;
 };
 
 const INITIAL_STATE = {} as DarkThemeContextValue;

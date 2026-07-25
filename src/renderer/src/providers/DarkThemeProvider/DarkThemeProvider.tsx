@@ -2,12 +2,9 @@ import { useCallback, useMemo, useState, type PropsWithChildren } from 'react';
 import { LocalStorageKeys } from '@renderer/common/constants';
 import { useLocalStorage } from '@renderer/hooks/useLocalStorage';
 import { DarkThemeContext, type DarkThemeContextValue } from './DarkThemeContext';
+import { ThemeOptions, type ThemeOptionValues } from './logic/constants';
 
-const THEME_OPTIONS = { dark: 'dark', light: 'light' };
-
-type DarkThemeProviderProps = PropsWithChildren;
-
-export default function DarkThemeProvider(props: DarkThemeProviderProps) {
+export default function DarkThemeProvider(props: PropsWithChildren) {
   const { children } = props;
 
   const [localStorageTheme, setLocalStorageTheme] = useLocalStorage(LocalStorageKeys.Theme);
@@ -15,19 +12,19 @@ export default function DarkThemeProvider(props: DarkThemeProviderProps) {
   // all useStates:
   const [isDarkMode, setIsDarkMode] = useState(() => {
     const deviceTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
-      ? THEME_OPTIONS.dark
-      : THEME_OPTIONS.light;
+      ? ThemeOptions.Dark
+      : ThemeOptions.Light;
 
     const currentTheme = localStorageTheme || deviceTheme;
 
     document.body.setAttribute('class', currentTheme);
     document.documentElement.setAttribute('data-theme', currentTheme);
 
-    return currentTheme === THEME_OPTIONS.dark;
+    return currentTheme === ThemeOptions.Dark;
   });
 
   const toggleDarkMode = useCallback(() => {
-    const newTheme = isDarkMode ? THEME_OPTIONS.light : THEME_OPTIONS.dark;
+    const newTheme = isDarkMode ? ThemeOptions.Light : ThemeOptions.Dark;
     const newIsDarkMode = !isDarkMode;
 
     setLocalStorageTheme(newTheme);
@@ -40,7 +37,31 @@ export default function DarkThemeProvider(props: DarkThemeProviderProps) {
     return newIsDarkMode;
   }, [isDarkMode, setIsDarkMode, setLocalStorageTheme]);
 
-  const value: DarkThemeContextValue = useMemo(() => ({ isDarkMode, toggleDarkMode }), [isDarkMode, toggleDarkMode]);
+  const switchTo = useCallback(
+    (mode: ThemeOptionValues) => {
+      const newIsDarkMode = mode === ThemeOptions.Dark;
+
+      setLocalStorageTheme(mode);
+
+      document.body.setAttribute('class', mode);
+      document.documentElement.setAttribute('data-theme', mode);
+
+      setIsDarkMode(newIsDarkMode);
+
+      return newIsDarkMode;
+    },
+    [setIsDarkMode, setLocalStorageTheme],
+  );
+
+  const value = useMemo(() => {
+    const _val: DarkThemeContextValue = {
+      isDarkMode,
+      toggleDarkMode,
+      switchTo,
+    };
+
+    return _val;
+  }, [isDarkMode, toggleDarkMode, switchTo]);
 
   return <DarkThemeContext.Provider value={value}>{children}</DarkThemeContext.Provider>;
 }
