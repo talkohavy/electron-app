@@ -1,6 +1,7 @@
 import { electronApp } from '@electron-toolkit/utils';
 import { ElectronEvents } from '@root/common/constants';
-import { app, BrowserWindow } from 'electron';
+import { app } from 'electron';
+import { attachAppEvents } from './core/attach-app-events';
 import { createWindow } from './core/create-window';
 import { IpcBridgeService } from './core/ipc-bridge';
 import { initClockModule } from './modules/clock';
@@ -25,20 +26,6 @@ async function startApp(): Promise<void> {
 function handleAppIsReady(): void {
   electronApp.setAppUserModelId('com.electron');
 
-  app.on(ElectronEvents.BrowserWindowCreated, (_, window) => {
-    window.webContents.on('before-input-event', (event, input) => {
-      if (input.code === 'Escape') {
-        window.close();
-        event.preventDefault();
-      }
-    });
-  });
-
-  // On macOS, re-create a window when the dock icon is clicked with none open.
-  app.on(ElectronEvents.Activate, () => {
-    if (BrowserWindow.getAllWindows().length === 0) createWindow();
-  });
-
   const ipcBridgeService = new IpcBridgeService();
 
   initMenuModule(ipcBridgeService);
@@ -46,6 +33,8 @@ function handleAppIsReady(): void {
   initCounterModule(ipcBridgeService);
   initDialogModule(ipcBridgeService);
   initSystemModule(ipcBridgeService);
+
+  attachAppEvents(app);
 
   createWindow();
 }
