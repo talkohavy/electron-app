@@ -40,7 +40,7 @@ export function createWindow(): BrowserWindow {
     return { action: 'deny' };
   });
 
-  // Open the DevTools.
+  // Open the DevTools on app start:
   window.webContents.openDevTools({
     mode: 'right', // <--- defaults to 'right'
   });

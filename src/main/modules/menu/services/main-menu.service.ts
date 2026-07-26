@@ -95,7 +95,6 @@ export class MainMenuService {
           { type: 'separator' },
           { role: 'close' },
           { role: 'quit' },
-          { role: 'toggleDevTools', accelerator: 'F11' },
           // { type: 'separator' },
           // { role: 'appMenu' },
           // { role: 'clearRecentDocuments' },
@@ -166,7 +165,7 @@ export class MainMenuService {
       submenu: [
         { role: 'reload' },
         { role: 'forceReload' },
-        { role: 'toggleDevTools' },
+        { role: 'toggleDevTools', accelerator: 'F12' }, // <--- defaults to 'cmd+option+i'
         { type: 'separator' },
         { role: 'resetZoom' },
         { role: 'zoomIn' },
