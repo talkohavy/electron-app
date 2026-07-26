@@ -4,6 +4,7 @@ import { app } from 'electron';
 import { attachAppEvents } from './core/attach-app-events';
 import { createWindow } from './core/create-window';
 import { IpcBridgeService } from './core/ipc-bridge';
+import { registerGlobalShortcuts } from './core/register-global-shortcuts';
 import { initClockModule } from './modules/clock';
 import { initCounterModule } from './modules/counter';
 import { initDialogModule } from './modules/dialog';
@@ -35,6 +36,8 @@ function handleAppIsReady(): void {
   initSystemModule(ipcBridgeService);
 
   attachAppEvents(app);
+
+  registerGlobalShortcuts();
 
   createWindow();
 }
