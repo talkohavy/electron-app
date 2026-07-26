@@ -14,6 +14,11 @@ export function createWindow(): BrowserWindow {
     width: 900,
     height: 670,
     show: false,
+    // titleBarStyle: 'hidden', // <--- this will make drag & drop window stop working, fixable only by css.
+    // maximizable: true,
+    // minWidth: 900,
+    // minHeight: 670,
+    // alwaysOnTop: true,
     /**
      * Keep our hand-rolled menu visible on Windows/Linux (no-op on macOS, where
      * the menu always lives in the system top bar).
