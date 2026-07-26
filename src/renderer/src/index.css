@@ -139,6 +139,18 @@
     overflow-x: hidden;
   }
 
+  #title-bar {
+    -webkit-app-region: drag;
+    @apply w-full;
+    @apply h-10;
+    @apply select-none;
+    @apply shrink-0;
+    @apply bg-[#23282b];
+    @apply z-10;
+    @apply border-b;
+    @apply border-b-gray-900;
+  }
+
   /* Track */
   body::-webkit-scrollbar-track {
     background: transparent;

@@ -14,7 +14,7 @@ export function createWindow(): BrowserWindow {
     width: 900,
     height: 670,
     show: false,
-    // titleBarStyle: 'hidden', // <--- this will make drag & drop window stop working, fixable only by css.
+    titleBarStyle: 'hidden', // <--- this will make drag & drop window stop working, fixable only by css.
     // maximizable: true,
     // minWidth: 900,
     // minHeight: 670,
