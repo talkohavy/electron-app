@@ -2,12 +2,12 @@ import { ApiEvents } from '@root/common/constants';
 import { BrowserWindow } from 'electron';
 import type { IpcBridgeService } from '@main/core/ipc-bridge';
 import type { ContextMenuRequest } from '@root/common/types';
-import type { MenuService } from '../services/menu.service';
+import type { ContextMenuService } from '../services/context-menu.service';
 
-export class MenuController {
+export class ContextMenuController {
   constructor(
     private readonly bridge: IpcBridgeService,
-    private readonly menuService: MenuService,
+    private readonly contextMenuService: ContextMenuService,
   ) {}
 
   register(): void {
@@ -21,7 +21,7 @@ export class MenuController {
 
       if (!window) return;
 
-      this.menuService.popupContext(window, request);
+      this.contextMenuService.popupContext(window, request);
     });
   }
 }
