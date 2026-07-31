@@ -1,9 +1,9 @@
 import { join } from 'path';
 import { is } from '@electron-toolkit/utils';
 import { WindowEvents } from '@root/common/constants';
-import { BrowserWindow, shell } from 'electron';
 // @ts-ignore - handled by electron-vite's ?asset loader
-import icon from '../../../../resources/icon.png?asset';
+import icon from '@root/resources/icon.png?asset';
+import { BrowserWindow, shell } from 'electron';
 
 /**
  * Creates the main application window and wires its lifecycle. Extracted from
